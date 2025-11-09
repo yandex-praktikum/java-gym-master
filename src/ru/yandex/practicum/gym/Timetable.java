@@ -48,4 +48,11 @@ public class Timetable {
         }
         return dayTreeMap.getOrDefault(timeOfDay, new ArrayList<>());
     }
+
+    public LinkedHashMap<Coach, Integer> getCountByCoaches() {
+
+
+
+    
+    }
 }

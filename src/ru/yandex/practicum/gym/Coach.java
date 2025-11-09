@@ -3,7 +3,6 @@ package ru.yandex.practicum.gym;
 import java.util.Objects;
 
 public class Coach {
-
     //фамилия
     private String surname;
     //имя
