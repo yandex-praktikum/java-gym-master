@@ -16,12 +16,16 @@ public class GymMaster {
         Timetable timetable = new Timetable();
 
 // Добавляем две тренировки на одно и то же время
-        timetable.addNewTrainingSession(new TrainingSession(group1, coach1, DayOfWeek.MONDAY, new TimeOfDay(10, 0)));
-        timetable.addNewTrainingSession(new TrainingSession(group2, coach2, DayOfWeek.MONDAY, new TimeOfDay(10, 20)));
-        timetable.addNewTrainingSession(new TrainingSession(group2, coach2, DayOfWeek.WEDNESDAY, new TimeOfDay(12, 20)));
+        timetable.addNewTrainingSession(new TrainingSession(group1, coach1, DayOfWeek.MONDAY,
+                new TimeOfDay(10, 0)));
+        timetable.addNewTrainingSession(new TrainingSession(group2, coach2, DayOfWeek.MONDAY,
+                new TimeOfDay(10, 20)));
+        timetable.addNewTrainingSession(new TrainingSession(group2, coach2, DayOfWeek.WEDNESDAY,
+                new TimeOfDay(12, 20)));
 
 // Получаем список тренировок в понедельник в 10:00
-        ArrayList<TrainingSession> monday10 = timetable.getTrainingSessionsForDayAndTime(DayOfWeek.MONDAY, new TimeOfDay(10, 0));
+        ArrayList<TrainingSession> monday10 = timetable.getTrainingSessionsForDayAndTime(DayOfWeek.MONDAY,
+                new TimeOfDay(10, 0));
 
         System.out.println("Количество занятий в понедельник в 10:00: " + monday10.size());
 
