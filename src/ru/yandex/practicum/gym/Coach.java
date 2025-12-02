@@ -3,18 +3,26 @@ package ru.yandex.practicum.gym;
 import java.util.Objects;
 
 public class Coach {
-
-    //фамилия
-    private String surname;
-    //имя
+    private int id;
     private String name;
-    //отчество
-    private String middleName;
 
-    public Coach(String surname, String name, String middleName) {
-        this.surname = surname;
-        this.name = name;
-        this.middleName = middleName;
+    public Coach(int id, String name) {
+        if (id < 0) {
+            throw new IllegalArgumentException("Coach ID cannot be negative.");
+        }
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Coach name cannot be null or empty.");
+        }
+        this.id = id;
+        this.name = name.trim();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -22,23 +30,16 @@ public class Coach {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Coach coach = (Coach) o;
-        return Objects.equals(surname, coach.surname) && Objects.equals(name, coach.name) && Objects.equals(middleName, coach.middleName);
+        return id == coach.id && Objects.equals(name, coach.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(surname, name, middleName);
+        return Objects.hash(id, name);
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getMiddleName() {
-        return middleName;
+    @Override
+    public String toString() {
+        return "Coach{id=" + id + ", name='" + name + "'}";
     }
 }

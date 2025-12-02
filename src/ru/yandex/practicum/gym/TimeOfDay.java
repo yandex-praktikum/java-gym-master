@@ -3,21 +3,33 @@ package ru.yandex.practicum.gym;
 import java.util.Objects;
 
 public class TimeOfDay implements Comparable<TimeOfDay> {
-
-    //часы (от 0 до 23)
     private int hours;
-    //минуты (от 0 до 59)
     private int minutes;
 
     public TimeOfDay(int hours, int minutes) {
+        if (hours < 0 || hours > 23) {
+            throw new IllegalArgumentException("Hours must be between 0 and 23.");
+        }
+        if (minutes < 0 || minutes > 59) {
+            throw new IllegalArgumentException("Minutes must be between 0 and 59.");
+        }
         this.hours = hours;
         this.minutes = minutes;
     }
 
+    public int getHours() {
+        return hours;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
     @Override
-    public int compareTo(TimeOfDay o) {
-        if (hours != o.hours) return hours - o.hours;
-        return minutes - o.minutes;
+    public int compareTo(TimeOfDay other) {
+        int hourCompare = Integer.compare(this.hours, other.hours);
+        if (hourCompare != 0) return hourCompare;
+        return Integer.compare(this.minutes, other.minutes);
     }
 
     @Override
@@ -33,11 +45,8 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
         return Objects.hash(hours, minutes);
     }
 
-    public int getHours() {
-        return hours;
-    }
-
-    public int getMinutes() {
-        return minutes;
+    @Override
+    public String toString() {
+        return String.format("%02d:%02d", hours, minutes);
     }
 }
