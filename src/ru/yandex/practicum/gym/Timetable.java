@@ -1,11 +1,12 @@
 package ru.yandex.practicum.gym;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.HashMap;
 
 public class Timetable {
-    private Map<DayOfWeek, TreeMap<TimeOfDay,TrainingSession>> timetable;
+    private Map<DayOfWeek, TreeMap<TimeOfDay, ArrayList<TrainingSession>>> timetable;
 
     public Timetable() {
         timetable = new HashMap<>();
@@ -20,26 +21,33 @@ public class Timetable {
 
     public void addNewTrainingSession(TrainingSession trainingSession) {
         //сохраняем занятие в расписании
-        TreeMap<TimeOfDay,TrainingSession> curTreeMap = timetable.get(trainingSession.getDayOfWeek());
-        curTreeMap.put(trainingSession.getTimeOfDay(),trainingSession);
+        TreeMap<TimeOfDay,ArrayList<TrainingSession>> curTreeMap = timetable.get(trainingSession.getDayOfWeek());
+        ArrayList<TrainingSession> listTrainingSession;
+        if (curTreeMap.containsKey(trainingSession.getTimeOfDay())){
+            listTrainingSession = curTreeMap.get(trainingSession.getTimeOfDay());
+        }
+        else {
+            listTrainingSession = new ArrayList<>();
+            curTreeMap.put(trainingSession.getTimeOfDay(),listTrainingSession);
+        }
+        listTrainingSession.add(trainingSession);
     }
 
-    public TreeMap<TimeOfDay,TrainingSession> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
+    public TreeMap<TimeOfDay,ArrayList<TrainingSession>> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
         //как реализовать, тоже непонятно, но сложность должна быть О(1)
         return timetable.get(dayOfWeek);
     }
 
-    public TrainingSession getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
+    public ArrayList<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
         //как реализовать, тоже непонятно, но сложность должна быть О(1)
-        TreeMap<TimeOfDay,TrainingSession> curTreeMap = timetable.get(dayOfWeek);
-        return curTreeMap.get(timeOfDay);
+        return timetable.get(dayOfWeek).get(timeOfDay);
     }
 
     public void getTrainingSessionsForDayToString(DayOfWeek dayOfWeek) {
         //как реализовать, тоже непонятно, но сложность должна быть О(1)
         System.out.println("Расписание для дня недели " + dayOfWeek + ":");
-        TreeMap<TimeOfDay,TrainingSession> curTreeMap = timetable.get(dayOfWeek);
-        for (TrainingSession trainingSession : curTreeMap.values()){
+        TreeMap<TimeOfDay,ArrayList<TrainingSession>> curTreeMap = timetable.get(dayOfWeek);
+        for (ArrayList<TrainingSession> trainingSession : curTreeMap.values()){
             System.out.println(trainingSession);
         }
     }
