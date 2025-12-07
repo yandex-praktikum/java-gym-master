@@ -14,7 +14,7 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
         this.minutes = minutes;
     }
 
-    @Override
+    /*@Override
     public int compareTo(TimeOfDay o) {
         if (hours != o.hours) return hours - o.hours;
         return minutes - o.minutes;
@@ -31,7 +31,7 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
     @Override
     public int hashCode() {
         return Objects.hash(hours, minutes);
-    }
+    }*/
 
     public int getHours() {
         return hours;
@@ -39,5 +39,35 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
 
     public int getMinutes() {
         return minutes;
+    }
+
+    @Override
+    public int hashCode(){
+        return 100*hours + minutes;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TimeOfDay timeOfDay = (TimeOfDay) o;
+        return this.hours==timeOfDay.hours && this.minutes==timeOfDay.minutes;
+    }
+
+    @Override
+    public int compareTo(TimeOfDay o) {
+        return this.hours*100+this.minutes - o.hours*100+o.minutes;
+    }
+
+    @Override
+    public String toString(){
+        String minutesStr;
+        if (minutes < 10) {
+            minutesStr = "0"+minutes;
+        }
+        else {
+            minutesStr = "" + minutes;
+        }
+        return "Время начала занятия " + hours + ":" +  minutesStr;
     }
 }
