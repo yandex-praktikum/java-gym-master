@@ -1,12 +1,9 @@
 package ru.yandex.practicum.gym;
 
 public class Group {
-    //название группы
-    private String title;
-    //тип (взрослая или детская)
-    private Age age;
-    //длительность (в минутах)
-    private int duration;
+    private String title; //название группы
+    private Age age; //тип (взрослая или детская)
+    private int duration; //длительность (в минутах)
 
     public Group(String title, Age age, int duration) {
         this.title = title;
