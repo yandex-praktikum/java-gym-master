@@ -6,8 +6,6 @@ public class Timetable {
 
     private HashMap<DayOfWeek, TreeMap<TimeOfDay, List<TrainingSession>>> timetable = new HashMap<>();
 
-    //private
-
     public void addNewTrainingSession(TrainingSession trainingSession) {
         //сохраняем занятие в расписании
 
@@ -19,7 +17,7 @@ public class Timetable {
 
     public TreeMap<TimeOfDay, List<TrainingSession>> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
         //как реализовать, тоже непонятно, но сложность должна быть О(1)
-        return timetable.get(dayOfWeek);
+        return timetable.getOrDefault(dayOfWeek, new TreeMap<>());
     }
 
 
@@ -27,7 +25,7 @@ public class Timetable {
         //как реализовать, тоже непонятно, но сложность должна быть О(1)
 
         TreeMap<TimeOfDay, List<TrainingSession>> weekSchedule = timetable.get(dayOfWeek);
-        return weekSchedule.get(timeOfDay);
+        return weekSchedule.getOrDefault(timeOfDay, new ArrayList<>());
     }
 
     public List<CounterOfTrainingsByCoach> getCountByCoaches() {
