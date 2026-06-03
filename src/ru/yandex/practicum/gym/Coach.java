@@ -5,11 +5,13 @@ import java.util.Objects;
 public class Coach {
 
     //фамилия
-    private String surname;
+    private final String surname;
     //имя
-    private String name;
+    private final String name;
     //отчество
-    private String middleName;
+    private final String middleName;
+    //количество тренировок
+    private int countOfTrainings;
 
     public Coach(String surname, String name, String middleName) {
         this.surname = surname;
@@ -34,11 +36,24 @@ public class Coach {
         return surname;
     }
 
+    public void addTraining() {
+        countOfTrainings++;
+    }
+
+    public int getCountOfTrainings() {
+        return countOfTrainings;
+    }
+
     public String getName() {
         return name;
     }
 
     public String getMiddleName() {
         return middleName;
+    }
+
+    @Override
+    public String toString() {
+        return "Coach{" + "surname='" + surname + '\'' + ", name='" + name + '\'' + ", countOfTrainings=" + countOfTrainings + '}';
     }
 }
