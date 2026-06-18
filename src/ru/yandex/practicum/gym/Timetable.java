@@ -8,7 +8,6 @@ public class Timetable {
     private HashMap<DayOfWeek, TreeMap<TimeOfDay, List<TrainingSession>>> timetable = new HashMap<>();
 
     public void addNewTrainingSession(TrainingSession trainingSession) {
-        //сохраняем занятие в расписании
         if (timetable.containsKey(trainingSession.getDayOfWeek())) {
 
             if (timetable.get(trainingSession.getDayOfWeek()).containsKey(trainingSession.getTimeOfDay())) {
@@ -48,9 +47,7 @@ public class Timetable {
         for (TrainingSession session : allTrainingSessions) {
             Coach coach = session.getCoach();
 
-            Integer newCount = counters.containsKey(coach)
-                    ? counters.getOrDefault(coach, 0) + 1
-                    : 1;
+            Integer newCount = counters.containsKey(coach) ? counters.getOrDefault(coach, 0) + 1 : 1;
             counters.put(coach, newCount);
         }
 
