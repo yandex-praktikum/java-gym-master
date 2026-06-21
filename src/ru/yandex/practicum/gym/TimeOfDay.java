@@ -10,6 +10,9 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
     private int minutes;
 
     public TimeOfDay(int hours, int minutes) {
+        if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+            throw new IllegalArgumentException("Некорректные значения времени");
+        }
         this.hours = hours;
         this.minutes = minutes;
     }

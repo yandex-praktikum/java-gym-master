@@ -5,13 +5,22 @@ import java.util.Objects;
 public class Coach {
 
     //фамилия
-    private String surname;
+    private final String surname;
     //имя
-    private String name;
+    private final String name;
     //отчество
-    private String middleName;
+    private final String middleName;
 
     public Coach(String surname, String name, String middleName) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Имя не может быть пустым или null");
+        }
+        if (surname == null || surname.isBlank()) {
+            throw new IllegalArgumentException("Фамилия не может быть пустым или null");
+        }
+        if (middleName == null) {
+            throw new IllegalArgumentException("Отчество не может быть null");
+        }
         this.surname = surname;
         this.name = name;
         this.middleName = middleName;
