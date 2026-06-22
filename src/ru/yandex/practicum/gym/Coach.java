@@ -12,6 +12,15 @@ public class Coach {
     private String middleName;
 
     public Coach(String surname, String name, String middleName) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Имя не может быть пустым или null");
+        }
+        if (surname == null || surname.isBlank()) {
+            throw new IllegalArgumentException("Фамилия не может быть пустым или null");
+        }
+        if (middleName == null) {
+            throw new IllegalArgumentException("Отчество не может быть null");
+        }
         this.surname = surname;
         this.name = name;
         this.middleName = middleName;
@@ -40,5 +49,20 @@ public class Coach {
 
     public String getMiddleName() {
         return middleName;
+    }
+
+    public void setSurname(String surname) {
+        if (surname == null || surname.isBlank()) return;
+        this.surname = surname;
+    }
+
+    public void setName(String name) {
+        if (name == null || name.isBlank()) return;
+        this.name = name;
+    }
+
+    public void setMiddleName(String middleName) {
+        if (middleName == null) return;
+        this.middleName = middleName;
     }
 }
