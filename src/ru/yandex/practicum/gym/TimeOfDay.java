@@ -43,4 +43,14 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
     public int getMinutes() {
         return minutes;
     }
+
+    public void setHours(int hours) {
+        if (hours < 0 || hours > 23) return;
+        this.hours = hours;
+    }
+
+    public void setMinutes(int minutes) {
+        if (minutes < 0 || minutes > 59) return;
+        this.minutes = minutes;
+    }
 }

@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Group {
     //название группы
-    private final String title;
+    private String title;
     //тип (взрослая или детская)
-    private final Age age;
+    private Age age;
     //длительность (в минутах)
     private int duration;
 
@@ -35,6 +35,21 @@ public class Group {
 
     public int getDuration() {
         return duration;
+    }
+
+    public void setTitle(String title) {
+        if (title == null || title.isBlank()) return;
+        this.title = title;
+    }
+
+    public void setAge(Age age) {
+        if (age == null) return;
+        this.age = age;
+    }
+
+    public void setDuration(int duration) {
+        if (duration < 1 || duration > 1440) return;
+        this.duration = duration;
     }
 
     @Override

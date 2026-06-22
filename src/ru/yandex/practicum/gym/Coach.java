@@ -5,11 +5,11 @@ import java.util.Objects;
 public class Coach {
 
     //фамилия
-    private final String surname;
+    private String surname;
     //имя
-    private final String name;
+    private String name;
     //отчество
-    private final String middleName;
+    private String middleName;
 
     public Coach(String surname, String name, String middleName) {
         if (name == null || name.isBlank()) {
@@ -49,5 +49,20 @@ public class Coach {
 
     public String getMiddleName() {
         return middleName;
+    }
+
+    public void setSurname(String surname) {
+        if (surname == null || surname.isBlank()) return;
+        this.surname = surname;
+    }
+
+    public void setName(String name) {
+        if (name == null || name.isBlank()) return;
+        this.name = name;
+    }
+
+    public void setMiddleName(String middleName) {
+        if (middleName == null) return;
+        this.middleName = middleName;
     }
 }

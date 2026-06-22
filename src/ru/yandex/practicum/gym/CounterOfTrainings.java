@@ -3,8 +3,8 @@ package ru.yandex.practicum.gym;
 import java.util.Objects;
 
 public class CounterOfTrainings implements Comparable<CounterOfTrainings> {
-    private final Coach coach;
-    private final int countOfTrainings;
+    private Coach coach;
+    private int countOfTrainings;
 
     public CounterOfTrainings(Coach coach, int countOfTrainings) {
         if (coach == null) {
@@ -23,6 +23,16 @@ public class CounterOfTrainings implements Comparable<CounterOfTrainings> {
 
     public int getCountOfTrainings() {
         return countOfTrainings;
+    }
+
+    public void setCoach(Coach coach) {
+        if (coach == null) return;
+        this.coach = coach;
+    }
+
+    public void setCountOfTrainings(int countOfTrainings) {
+        if (countOfTrainings < 0) return;
+        this.countOfTrainings = countOfTrainings;
     }
 
     @Override
