@@ -15,9 +15,17 @@ public class Timetable {
 
     public void addNewTrainingSession(TrainingSession trainingSession) {
         DayOfWeek day = trainingSession.getDayOfWeek();
-        trainingsByDay.computeIfAbsent(day, d -> new ArrayList<>()).add(trainingSession);
+
+        List<TrainingSession> dayTrainings = trainingsByDay.computeIfAbsent(day, d -> new ArrayList<>());
+
+        dayTrainings.add(trainingSession);
+
+        dayTrainings.sort(Comparator.comparing(TrainingSession::getTimeOfDay));
+
         TreeMap<TimeOfDay, List<TrainingSession>> daySchedule = trainingsByTime.computeIfAbsent(day, d -> new TreeMap<>());
+
         TimeOfDay time = trainingSession.getTimeOfDay();
+
         daySchedule.computeIfAbsent(time, t -> new ArrayList<>()).add(trainingSession);
     }
 
