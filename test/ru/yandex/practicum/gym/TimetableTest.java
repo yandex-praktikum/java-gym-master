@@ -8,13 +8,36 @@ import java.util.*;
 public class TimetableTest {
 
     @Test
+    void testGetTrainingSessionsForDayAndTimeMultipleSessions() {
+        Timetable timetable = new Timetable();
+
+        Coach coach1 = new Coach("Иванов", "Иван", "Иванович");
+        Coach coach2 = new Coach("Петров", "Петр", "Петрович");
+
+        Group group1 = new Group("Акробатика", Age.CHILD, 60);
+        Group group2 = new Group("Йога", Age.ADULT, 90);
+
+        TrainingSession session1 = new TrainingSession(group1, coach1, DayOfWeek.MONDAY, new TimeOfDay(13, 0));
+
+        TrainingSession session2 = new TrainingSession(group2, coach2, DayOfWeek.MONDAY, new TimeOfDay(13, 0));
+
+        timetable.addNewTrainingSession(session1);
+        timetable.addNewTrainingSession(session2);
+
+        List<TrainingSession> result = timetable.getTrainingSessionsForDayAndTime(DayOfWeek.MONDAY, new TimeOfDay(13, 0));
+
+        Assertions.assertEquals(2, result.size());
+        Assertions.assertEquals(session1, result.get(0));
+        Assertions.assertEquals(session2, result.get(1));
+    }
+
+    @Test
     void testGetTrainingSessionsForDaySingleSession() {
         Timetable timetable = new Timetable();
 
         Group group = new Group("Акробатика для детей", Age.CHILD, 60);
         Coach coach = new Coach("Васильев", "Николай", "Сергеевич");
-        TrainingSession singleTrainingSession = new TrainingSession(group, coach,
-                DayOfWeek.MONDAY, new TimeOfDay(13, 0));
+        TrainingSession singleTrainingSession = new TrainingSession(group, coach, DayOfWeek.MONDAY, new TimeOfDay(13, 0));
 
         timetable.addNewTrainingSession(singleTrainingSession);
 
@@ -33,18 +56,14 @@ public class TimetableTest {
         Coach coach = new Coach("Васильев", "Николай", "Сергеевич");
 
         Group groupAdult = new Group("Акробатика для взрослых", Age.ADULT, 90);
-        TrainingSession thursdayAdultTrainingSession = new TrainingSession(groupAdult, coach,
-                DayOfWeek.THURSDAY, new TimeOfDay(20, 0));
+        TrainingSession thursdayAdultTrainingSession = new TrainingSession(groupAdult, coach, DayOfWeek.THURSDAY, new TimeOfDay(20, 0));
 
         timetable.addNewTrainingSession(thursdayAdultTrainingSession);
 
         Group groupChild = new Group("Акробатика для детей", Age.CHILD, 60);
-        TrainingSession mondayChildTrainingSession = new TrainingSession(groupChild, coach,
-                DayOfWeek.MONDAY, new TimeOfDay(13, 0));
-        TrainingSession thursdayChildTrainingSession = new TrainingSession(groupChild, coach,
-                DayOfWeek.THURSDAY, new TimeOfDay(13, 0));
-        TrainingSession saturdayChildTrainingSession = new TrainingSession(groupChild, coach,
-                DayOfWeek.SATURDAY, new TimeOfDay(10, 0));
+        TrainingSession mondayChildTrainingSession = new TrainingSession(groupChild, coach, DayOfWeek.MONDAY, new TimeOfDay(13, 0));
+        TrainingSession thursdayChildTrainingSession = new TrainingSession(groupChild, coach, DayOfWeek.THURSDAY, new TimeOfDay(13, 0));
+        TrainingSession saturdayChildTrainingSession = new TrainingSession(groupChild, coach, DayOfWeek.SATURDAY, new TimeOfDay(10, 0));
 
         timetable.addNewTrainingSession(mondayChildTrainingSession);
         timetable.addNewTrainingSession(thursdayChildTrainingSession);
@@ -69,8 +88,7 @@ public class TimetableTest {
 
         Group group = new Group("Акробатика для детей", Age.CHILD, 60);
         Coach coach = new Coach("Васильев", "Николай", "Сергеевич");
-        TrainingSession singleTrainingSession = new TrainingSession(group, coach,
-                DayOfWeek.MONDAY, new TimeOfDay(13, 0));
+        TrainingSession singleTrainingSession = new TrainingSession(group, coach, DayOfWeek.MONDAY, new TimeOfDay(13, 0));
 
         timetable.addNewTrainingSession(singleTrainingSession);
 
@@ -89,8 +107,7 @@ public class TimetableTest {
         Coach coach = new Coach("Васильев", "Николай", "Сергеевич");
         Group group = new Group("Акробатика", Age.CHILD, 60);
 
-        timetable.addNewTrainingSession(
-                new TrainingSession(group, coach, DayOfWeek.MONDAY, new TimeOfDay(13, 0)));
+        timetable.addNewTrainingSession(new TrainingSession(group, coach, DayOfWeek.MONDAY, new TimeOfDay(13, 0)));
 
         Map<Coach, Integer> result = timetable.getCountByCoaches();
 
@@ -105,14 +122,11 @@ public class TimetableTest {
         Coach coach = new Coach("Васильев", "Николай", "Сергеевич");
         Group group = new Group("Акробатика", Age.CHILD, 60);
 
-        timetable.addNewTrainingSession(
-                new TrainingSession(group, coach, DayOfWeek.MONDAY, new TimeOfDay(13, 0)));
+        timetable.addNewTrainingSession(new TrainingSession(group, coach, DayOfWeek.MONDAY, new TimeOfDay(13, 0)));
 
-        timetable.addNewTrainingSession(
-                new TrainingSession(group, coach, DayOfWeek.TUESDAY, new TimeOfDay(14, 0)));
+        timetable.addNewTrainingSession(new TrainingSession(group, coach, DayOfWeek.TUESDAY, new TimeOfDay(14, 0)));
 
-        timetable.addNewTrainingSession(
-                new TrainingSession(group, coach, DayOfWeek.WEDNESDAY, new TimeOfDay(15, 0)));
+        timetable.addNewTrainingSession(new TrainingSession(group, coach, DayOfWeek.WEDNESDAY, new TimeOfDay(15, 0)));
 
         Map<Coach, Integer> result = timetable.getCountByCoaches();
 
@@ -128,14 +142,11 @@ public class TimetableTest {
 
         Group group = new Group("Акробатика", Age.CHILD, 60);
 
-        timetable.addNewTrainingSession(
-                new TrainingSession(group, coach1, DayOfWeek.MONDAY, new TimeOfDay(10, 0)));
+        timetable.addNewTrainingSession(new TrainingSession(group, coach1, DayOfWeek.MONDAY, new TimeOfDay(10, 0)));
 
-        timetable.addNewTrainingSession(
-                new TrainingSession(group, coach1, DayOfWeek.TUESDAY, new TimeOfDay(10, 0)));
+        timetable.addNewTrainingSession(new TrainingSession(group, coach1, DayOfWeek.TUESDAY, new TimeOfDay(10, 0)));
 
-        timetable.addNewTrainingSession(
-                new TrainingSession(group, coach2, DayOfWeek.WEDNESDAY, new TimeOfDay(10, 0)));
+        timetable.addNewTrainingSession(new TrainingSession(group, coach2, DayOfWeek.WEDNESDAY, new TimeOfDay(10, 0)));
 
         Map<Coach, Integer> result = timetable.getCountByCoaches();
 
